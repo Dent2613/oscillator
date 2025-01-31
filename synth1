@@ -1,0 +1,64 @@
+// https://wokwi.com/projects/421344668490267649
+float pi = 3.14159265359;
+float bi = 2 * pi;
+float frq = 30;
+float s [30];
+float m [30];
+int lastt;
+float t [30];
+float p [30];
+float frd = 30;
+float amplt = 5;
+byte r =  2;
+int n = 30;
+
+int form = 2;
+
+#define apot 1
+#define fpot 2
+#define formt 2
+
+
+void setup() {
+  Serial.begin(9600);
+  for (int i = 0; i < frd; i++) {
+    switch (r) {
+      case 1:
+        s[i] = sin(bi / frd * i );
+        break;
+      case 2:
+        if (sin(bi / frd * i ) > 0) {
+          s[i] = 1;
+        }
+        else if (sin(bi / frd * i ) < 0) {
+          s[i] = -1;
+        }
+        else if (sin(bi / frd * i ) == 0) {
+          s[i] = 0;
+        }
+        break;
+      case 3:
+        s[i] = asin(sin(bi / frd * i) );
+        break;
+      case 4:
+        s[i] = 2 * (pi / frd * i / 3 - floor(pi / frd * i / 3 + 0.5));
+    }
+  }
+
+}
+
+void loop() {
+  amplt = floor(analogRead(apot));
+
+
+  for (int i = 0; i < frd; i++) {
+    if (millis() - lastt > analogRead(fpot) + 1) {
+      lastt = millis();
+      Serial.println(s[i]*amplt);
+    }
+  }
+
+
+
+
+}
